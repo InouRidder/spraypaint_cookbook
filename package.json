@@ -5,7 +5,7 @@
   "author": "Inou Ridder <inouridder@gmail.com>",
   "private": true,
   "scripts": {
-    "dev": "nuxt",
+    "dev": "NUXT_PORT=5000 nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate",
@@ -13,10 +13,13 @@
     "precommit": "npm run lint"
   },
   "dependencies": {
-    "bulma": "^0.7.5",
-    "nuxt": "^2.8.1"
+    "buefy": "^0.8.10",
+    "isomorphic-fetch": "^2.2.1",
+    "nuxt": "^2.8.1",
+    "spraypaint": "^0.10.10"
   },
   "devDependencies": {
+    "@nuxtjs/dotenv": "^1.4.1",
     "babel-eslint": "^10.0.2",
     "eslint": "^6.0.1",
     "eslint-friendly-formatter": "^4.0.1",
