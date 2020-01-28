@@ -49,6 +49,7 @@
       removeQuery(queryToRemove) {
         this.queries = this.queries.filter(query => query !== queryToRemove)
         this.updateHistory()
+        this.emitSearch()
       },
       addQuery(query) {
         if (this.queries.includes(query)) return
