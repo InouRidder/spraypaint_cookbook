@@ -10,14 +10,30 @@ module.exports = {
       { hid: 'description', name: 'description', content: 'frontend for cookbook app' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
-    ]
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'stylesheet', href: 'https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'}
+    ],
+    script: [
+      {
+       src: 'https://kit.fontawesome.com/96524d7648.js', crossorigin: 'anonymous'
+      }
+     ]
   },
+  modules: [
+    [
+      'vue-sweetalert2/nuxt',
+      {
+        confirmButtonColor: '#41b882',
+        cancelButtonColor: '#ff7674'
+      }
+    ]
+  ],
   plugins: [
     '~/plugins/buefy',
     '~/plugins/spraypaint'
   ],
   buildModules: [
+    '@nuxt/typescript-build',
     '@nuxtjs/dotenv'
   ],
   /*
