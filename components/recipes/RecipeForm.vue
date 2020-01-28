@@ -81,9 +81,9 @@
         }
 
         recipe.updateAttributes(this.recipe)
-        console.log(recipe)
+        recipe.category.isPersisted = true // Without this setting, spraypaint will try to create a new category.
 
-        const res = await recipe.save()
+        const res = await recipe.save({ with: 'category.id' })
 
         if (res) {
           this.$router.push('/')
