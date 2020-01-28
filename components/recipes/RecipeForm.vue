@@ -1,5 +1,5 @@
 <template>
-    <div id='recipe-form'>
+    <div id='recipe-form' class='container has-margin-top'>
       <section>
         <b-field
           horizontal
@@ -15,7 +15,7 @@
 
         <b-field
           horizontal
-          label="Topic"
+          label="Category"
         >
           <b-select
             v-model='recipe.category.id'
@@ -62,6 +62,10 @@
     </section>
   </div>
 </template>
+
+<style scoped>
+
+</style>
 
 <script>
   export default {

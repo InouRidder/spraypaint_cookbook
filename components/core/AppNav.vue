@@ -3,7 +3,7 @@
     <div class="container">
       <div class="navbar-brand">
         <n-link class="navbar-item" to="/">
-          <img src="~/assets/graphiti-logo.png" alt="Logo">
+          <img src="~/assets/logo.png" alt="Logo">
         </n-link>
         <span class="navbar-burger burger" data-target="navbarMenu">
           <span></span>

@@ -47,7 +47,11 @@
         return this.recipe.category ? this.recipe.category.name : ''
       },
       imgSrc() {
-        return "https://source.unsplash.com/200x100/?food," + this.categoryName
+        if (this.categoryName) {
+          return `https://source.unsplash.com/200x100/?food,${this.categoryName}`
+        } else {
+          return "https://source.unsplash.com/200x100/?food"
+        }
       }
     },
     methods: {
@@ -56,7 +60,7 @@
           title: `Are you sure you want to delete ${this.recipe.title}`,
           confirmButtonText: 'Delete',
           showCancelButton: true,
-          confirmButtonColor: '#714DD2',
+          confirmButtonColor: '#714DD2'
         })
 
         if (accept) {

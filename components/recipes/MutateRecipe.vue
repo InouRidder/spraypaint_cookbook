@@ -1,15 +1,25 @@
 <template>
-  <div id='recipe-new'>
-    <div class="columns is-centered">
-      <div class="column is-half">
+  <section id='recipe-new'>
+    <section class="columns is-centered container margin-bottom">
+      <div class="column is-one-third is-paddingless">
         <RecipeCard :recipe='recipe'/>
       </div>
-    </div>
+    </section>
 
     <RecipeForm :recipe='recipe'/>
-  </div>
+  </section>
 
 </template>
+
+<style scoped lang='scss'>
+  #recipe-new {
+    margin: 100px 0px;
+
+    .margin-bottom {
+      margin-bottom: 50px;
+    }
+  }
+</style>
 
 <script>
   import RecipeForm from '~/components/recipes/RecipeForm'
