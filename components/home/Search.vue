@@ -43,8 +43,8 @@
     },
     methods: {
       search() {
-        this.emitSearch()
         this.addQuery(this.query)
+        this.emitSearch()
       },
       removeQuery(queryToRemove) {
         this.queries = this.queries.filter(query => query !== queryToRemove)
@@ -57,7 +57,13 @@
         this.updateHistory()
       },
       updateHistory() {
-        history.pushState({}, "", `?q=${this.queries.join(',')}`)
+        if (this.queries.length === 0) {
+          this.$emit('clear')
+          history.replaceState({}, "", `/`)
+        } else {
+          history.pushState({}, "", `?q=${this.queries.join(',')}`)
+        }
+
         this.query = ''
       },
       emitSearch() {
@@ -67,6 +73,7 @@
         if (this.$route.query.q) {
           this.queries = this.$route.query.q.split(',')
         } else {
+          this.$emit('clear')
           this.queries = []
         }
       }
