@@ -2,17 +2,79 @@
   <div class="box" id='search'>
     <div class="field has-addons">
       <div class="control is-expanded">
-        <input class="input" type="search" placeholder="Search for a recipe">
+        <input v-model='query' class="input" type="search" placeholder="Search for a recipe">
       </div>
       <div class="control">
-        <a class="button is-info">Search</a>
+        <a class="button" @click.prevent='search'>Search</a>
       </div>
     </div>
+    <section>
+       <b-tag v-for="query in queries"
+          class='has-space'
+          type="is-primary"
+          :key='query'
+          closable
+          aria-close-label="Close tag"
+          @close="removeQuery(query)">
+          {{ query }}
+      </b-tag>
+    </section>
   </div>
 </template>
 
+<style scoped>
+  .has-space {
+    margin: 2px;
+  }
+</style>
+
 <script>
   export default {
+    data() {
+      return {
+        query: '',
+        queries: []
+      }
+    },
+    computed: {
+      fullQuery() {
+        return this.queries.join(' ')
+      }
+    },
+    methods: {
+      search() {
+        this.emitSearch()
+        this.addQuery(this.query)
+      },
+      removeQuery(queryToRemove) {
+        this.queries = this.queries.filter(query => query !== queryToRemove)
+        this.updateHistory()
+      },
+      addQuery(query) {
+        if (this.queries.includes(query)) return
+
+        this.queries.push(query)
+        this.updateHistory()
+      },
+      updateHistory() {
+        history.pushState({}, "", `?q=${this.queries.join(',')}`)
+        this.query = ''
+      },
+      emitSearch() {
+        this.$emit('search', this.fullQuery)
+      },
+      syncParamsWithQuery() {
+        if (this.$route.query.q) {
+          this.queries = this.$route.query.q.split(',')
+        } else {
+          this.queries = []
+        }
+      }
+    },
+    mounted() {
+      this.syncParamsWithQuery()
+      window.onpopstate = this.syncParamsWithQuery
+    }
 
   }
 </script>
