@@ -33,18 +33,34 @@ export default {
   },
   data() {
     return {
-      recipes: []
+      recipes: [],
+      page: 1
     }
   },
   methods: {
     filterRecipes(id) {
       this.recipes = this.recipes.filter(recipe => recipe.id !== id)
+    },
+    attachScrollListener() {
+      window.onscroll = () => {
+         let bottomOfWindow = document.documentElement.scrollTop + window.innerHeight ===   document.documentElement.offsetHeight;
+
+        if (bottomOfWindow) {
+          this.fetchRecipes({ page: this.page += 1 })
+        }
+      }
+    },
+    async fetchRecipes({ page }) {
+      const { data } = await Recipe.per(10).page(page).includes('category').all()
+      this.recipes = [...(this.recipes), ...data]
     }
   },
-  async mounted() {
-    const { data } = await Recipe.includes('category').all()
-
-    this.recipes = data
+  async asyncData() {
+    const { data } = await Recipe.per(10).page(1).includes('category').all()
+    return { recipes: data }
+  },
+  mounted() {
+    this.attachScrollListener()
   }
 }
 </script>
