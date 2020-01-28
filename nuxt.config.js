@@ -20,13 +20,7 @@ module.exports = {
      ]
   },
   modules: [
-    [
-      'vue-sweetalert2/nuxt',
-      {
-        confirmButtonColor: '#41b882',
-        cancelButtonColor: '#ff7674'
-      }
-    ]
+    [ 'vue-sweetalert2/nuxt', { confirmButtonColor: '#714DD2' } ]
   ],
   plugins: [
     '~/plugins/buefy',

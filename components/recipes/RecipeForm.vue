@@ -81,15 +81,21 @@
         }
 
         recipe.updateAttributes(this.recipe)
+        console.log(recipe)
 
         const res = await recipe.save()
 
         if (res) {
           this.$router.push('/')
         } else {
-          console.log("Did save: todo validation pop up")
+          this.$swal.fire(
+            this.formatError(recipe.errors)
+          )
         }
       },
+      formatError(errors) {
+        return Object.keys(errors).map(attr => errors[attr].fullMessage).join(', ')
+      }
     },
     computed: {
       mutateBtnText() {

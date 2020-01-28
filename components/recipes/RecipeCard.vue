@@ -55,14 +55,14 @@
         const { value: accept } = await this.$swal.fire({
           title: `Are you sure you want to delete ${this.recipe.title}`,
           confirmButtonText: 'Delete',
-          showCancelButton: true
+          showCancelButton: true,
+          confirmButtonColor: '#714DD2',
         })
 
         if (accept) {
           this.recipe.destroy()
           this.$emit('destroyed', this.recipe.id)
         }
-
       }
     }
   }
