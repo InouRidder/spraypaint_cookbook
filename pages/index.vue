@@ -41,7 +41,7 @@ export default {
     filterRecipes(id) {
       this.recipes = this.recipes.filter(recipe => recipe.id !== id)
     },
-    attachScrollListener() {
+    attachInfiniteScroll() {
       window.onscroll = () => {
          let bottomOfWindow = document.documentElement.scrollTop + window.innerHeight ===   document.documentElement.offsetHeight;
 
@@ -60,7 +60,7 @@ export default {
     return { recipes: data }
   },
   mounted() {
-    this.attachScrollListener()
+    this.attachInfiniteScroll()
   }
 }
 </script>
