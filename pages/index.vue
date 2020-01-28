@@ -55,7 +55,7 @@ export default {
     async updateRecipesWithQuery(query) {
       this.searching = true
 
-      const { data } = await Recipe.where({ title: { prefix:  query } }).all()
+      const { data } = await Recipe.where({ text_includes: query }).all()
       this.recipes = data;
     },
     attachInfiniteScroll() {

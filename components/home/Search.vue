@@ -5,7 +5,7 @@
         <input v-model='query' class="input" type="search" placeholder="Search for a recipe">
       </div>
       <div class="control">
-        <a class="button" @click.prevent='search'>Search</a>
+        <a class="button" @click.prevent='addQuery'>Search</a>
       </div>
     </div>
     <section>
@@ -42,19 +42,14 @@
       }
     },
     methods: {
-      search() {
-        this.addQuery(this.query)
-        this.emitSearch()
+      addQuery() {
+        if (this.queries.includes(this.query)) return
+        this.queries.push(this.query)
+
+        this.updateHistory()
       },
       removeQuery(queryToRemove) {
         this.queries = this.queries.filter(query => query !== queryToRemove)
-        this.updateHistory()
-        this.emitSearch()
-      },
-      addQuery(query) {
-        if (this.queries.includes(query)) return
-
-        this.queries.push(query)
         this.updateHistory()
       },
       updateHistory() {
@@ -65,6 +60,7 @@
           history.pushState({}, "", `?q=${this.queries.join(',')}`)
         }
 
+        this.emitSearch()
         this.query = ''
       },
       emitSearch() {
