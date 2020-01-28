@@ -1,56 +1,50 @@
 <template>
-  <section class="hero is-primary is-fullheight">
-    <div class="hero-body">
-      <div class="container has-text-centered">
-        <app-logo/>
-        <h1 class="title">
-          ui
-        </h1>
-        <h2 class="subtitle">
-          frontend for cookbook app
-        </h2>
-        <div class="hero-section">
-          <a
-            href="https://nuxtjs.org/"
-            target="_blank"
-            class="button hero-button is-link is-outlined is-inverted">Nuxt.js Documentation</a>
-          <a
-            href="https://github.com/nuxt/nuxt.js"
-            target="_blank"
-            class="button hero-button is-success is-outlined is-inverted">Nuxt.js GitHub</a>
-        </div>
-        <div class="hero-section">
-          <a
-            href="https://bulma.io/"
-            target="_blank"
-            class="button hero-button is-link is-outlined is-inverted">Bulma Documentation</a>
-          <a
-            href="https://github.com/jgthms/bulma"
-            target="_blank"
-            class="button hero-button is-success is-outlined is-inverted">Bulma GitHub</a>
+  <section id="home">
+    <div class="container">
+      <div id="flow">
+        <span class="flow-1"></span>
+        <span class="flow-2"></span>
+        <span class="flow-3"></span>
+      </div>
+      <div class="section">
+        <search />
+        <div class="columns is-multiline">
+          <div v-for='recipe in recipes' :key='recipe.id' class="column">
+            <RecipeCard
+              :recipe='recipe'
+              @destroyed='filterRecipes'
+            />
+          </div>
         </div>
       </div>
     </div>
+    <Footer />
   </section>
 </template>
 
 <script>
-import AppLogo from '~/components/AppLogo.vue'
+import Search from '~/components/home/Search.vue'
+import RecipeCard from '~/components/recipes/RecipeCard.vue'
 
 export default {
   components: {
-    AppLogo
+    Search,
+    RecipeCard
+  },
+  data() {
+    return {
+      recipes: []
+    }
+  },
+  methods: {
+    filterRecipes(id) {
+      this.recipes = this.recipes.filter(recipe => recipe.id !== id)
+    }
+  },
+  async mounted() {
+    const { data } = await Recipe.includes('category').all()
+
+    this.recipes = data
   }
 }
 </script>
-<style>
-.hero-button {
-  margin-left: 5px;
-  margin-right: 5px;
-}
-.hero-section {
-  display: block;
-  padding: 0.25rem;
-}
-</style>
-
