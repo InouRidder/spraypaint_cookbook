@@ -77,16 +77,20 @@
       }
     },
     methods: {
-      async submit() {
+      createRecipe() {
         const recipe = new Recipe({ id: this.recipe.id })
 
-        if (recipe.id) {
-         recipe.isPersisted = true
-        }
+        if (recipe.id) recipe.isPersisted = true
+
+        this.recipe.category = new Category({ id: this.categoryId })
 
         recipe.updateAttributes(this.recipe)
-        recipe.category.isPersisted = true // Without this setting, spraypaint will try to create a new category.
 
+        if (recipe.category) recipe.category.isPersisted = true // Without this setting, spraypaint will try to create a new category. Recreating both objects to avoid mutating props directly.
+        return recipe;
+      },
+      async submit() {
+        const recipe = this.createRecipe()
         const res = await recipe.save({ with: 'category.id' })
 
         if (res) {
@@ -104,10 +108,15 @@
     computed: {
       mutateBtnText() {
         return this.recipe.id ? 'Update' : 'Save'
+      },
+      categoryId() {
+        const category = this.recipe.category
+        return category ? category.id : 0
       }
     },
-    async mounted() {
+    async mounted() { // TODO: replace with asyncData
       const { data } = await Category.all()
+
       this.categories = data
     }
 

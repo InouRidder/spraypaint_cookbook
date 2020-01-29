@@ -19,7 +19,7 @@
       }
     },
     async asyncData({ route }) {
-      const { data } = await Recipe.find(route.params.id)
+      const { data } = await Recipe.includes('category').find(route.params.id)
 
       return {
         recipe: {

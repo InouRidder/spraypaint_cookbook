@@ -27,7 +27,6 @@ module.exports = {
     '~/plugins/spraypaint'
   ],
   buildModules: [
-    '@nuxt/typescript-build',
     '@nuxtjs/dotenv'
   ],
   /*

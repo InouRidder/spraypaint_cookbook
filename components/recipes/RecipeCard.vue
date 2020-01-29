@@ -64,7 +64,7 @@
         })
 
         if (accept) {
-          this.recipe.destroy()
+          await this.recipe.destroy()
           this.$emit('destroyed', this.recipe.id)
         }
       }

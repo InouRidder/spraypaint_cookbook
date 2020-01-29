@@ -1,11 +1,6 @@
 <template>
   <section id="home">
     <div class="container">
-      <div id="flow">
-        <span class="flow-1"></span>
-        <span class="flow-2"></span>
-        <span class="flow-3"></span>
-      </div>
       <div class="section">
         <search
           @search='updateRecipesWithQuery'
