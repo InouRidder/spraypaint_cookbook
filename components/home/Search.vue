@@ -2,7 +2,7 @@
   <div class="box" id='search'>
     <div class="field has-addons">
       <div class="control is-expanded">
-        <input v-model='query' class="input" type="search" placeholder="Search for a recipe">
+        <input @keyup.enter='addQuery' v-model='query' class="input" type="search" placeholder="Search for a recipe">
       </div>
       <div class="control">
         <a class="button" @click.prevent='addQuery'>Search</a>
