@@ -19,6 +19,9 @@ module.exports = {
       }
      ]
   },
+  env: {
+    baseUrl: process.env.API_URL
+  },
   modules: [
     [ 'vue-sweetalert2/nuxt', { confirmButtonColor: '#714DD2' } ]
   ],
