@@ -5,30 +5,20 @@
         <n-link class="navbar-item" to="/">
           <img src="~/assets/logo.png" alt="Logo">
         </n-link>
-        <span class="navbar-burger burger" data-target="navbarMenu">
+        <span @click="dropdown = !dropdown" class="navbar-burger burger" data-target="navbarMenu">
           <span></span>
           <span></span>
           <span></span>
         </span>
       </div>
-      <div id="navbarMenu" class="navbar-menu">
+      <div id="navbarMenu" :class="navClass">
         <div class="navbar-end">
-          <n-link to='/' class="navbar-item is-active">
+          <n-link to=‘/’ class="navbar-item">
             Home
           </n-link>
-          <n-link to='/recipes/new' class="navbar-item">
+          <n-link to=‘/recipes/new’ class="navbar-item">
             Add a recipe
           </n-link>
-          <div class="navbar-item has-dropdown is-hoverable">
-            <div class="navbar-dropdown">
-              <n-link to='/recipes/new' class="navbar-item">
-                Add a recipe
-              </n-link>
-              <n-link to='/' class="navbar-item is-active">
-                Home
-              </n-link>
-            </div>
-          </div>
         </div>
       </div>
     </div>
@@ -37,6 +27,16 @@
 
 <script>
   export default {
+    data() {
+      return {
+        dropdown: false
+      }
+    },
+    computed: {
+      navClass() {
+        return "navbar-menu " + (this.dropdown ? 'is-active' : '')
+      }
+    }
 
   }
 </script>
